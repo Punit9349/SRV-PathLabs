@@ -3,9 +3,11 @@ import ReportManagement from "./ReportManagement";
 import ProgramManagement from "./ProgramManagement";
 import AppointmentManagement from './AppointmentsManagement';
 import OrdersManagement from './OrdersManagement';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 const AdminDashboard = () => {
+  let navigate=useNavigate();
   const [activeTab, setActiveTab] = useState('patients'); // Default tab
   const [patients, setPatients] = useState([]);
   const [tests, setTests] = useState([]);
@@ -27,6 +29,7 @@ const AdminDashboard = () => {
   const [message, setMessage] = useState("");
   const token = localStorage.getItem("token_admin");
   // Fetch Patients and Tests on Mount
+
   useEffect(() => {
     fetchPatients();
     fetchTests();
