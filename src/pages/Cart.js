@@ -220,7 +220,7 @@ const Cart = () => {
   };
 
   const updateTotalPrice = (tests, programs) => {
-    const total = tests.reduce((sum, item) => sum + item.test.price, 0) +
+    const total = tests.reduce((sum, item) => sum + item.test.testOfferRate, 0) +
                   programs.reduce((sum, item) => sum + item.program.price, 0);
     setTotalPrice(total);
   };
@@ -246,12 +246,12 @@ const Cart = () => {
           <div key={item._id} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg mb-3">
             <div>
               <h3 className="font-semibold text-lg">{item.test.name}</h3>
-              <p className="text-gray-600 text-sm">{item.test.parameters} Parameter(s) Covered</p>
+              <p className="text-gray-600 text-sm">{item.test.departmentName} </p>
               <p className="text-sm text-gray-500 mt-1">Quantity: {item.quantity}</p>
             </div>
             <div className="text-right">
-              <p className="text-green-600 font-bold text-lg">₹ {item.test.price}</p>
-              <button className="text-red-500 mt-2" onClick={() => handleRemoveTest(item.test._id, item.test.price)}>Remove</button>
+              <p className="text-green-600 font-bold text-lg">₹ {item.test.testOfferRate}</p>
+              <button className="text-red-500 mt-2" onClick={() => handleRemoveTest(item.test._id, item.test.testOfferRate)}>Remove</button>
             </div>
           </div>
         ))}

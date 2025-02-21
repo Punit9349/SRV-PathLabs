@@ -59,7 +59,7 @@ const TestMenu = () => {
       const response = await axios.post("http://localhost:5000/api/cart/add", {
         patientId,
         testId:test._id,
-        price:test.price,
+        price:test.testOfferRate,
       }, {
         headers: { "auth-token": token },
       });
@@ -114,26 +114,46 @@ const TestMenu = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-        {filteredTests.map((test) => (
-          <div key={test._id} className="bg-white shadow-md p-4 rounded-lg">
-            <h3 className="font-semibold text-lg">{test.name}</h3>
-            <p className="text-gray-600 text-sm">{test.description}</p>
-            <p className="text-gray-600 text-sm">{test.instructions}</p>
-            <p className="text-xl font-bold mt-2">₹ {test.price}</p>
-            <div className="flex items-center space-x-2 mt-2">
-              {test.homeCollection && <p className="text-green-600 text-sm">✔ Home Collection</p>}
-              {test.labVisit && <p className="text-green-600 text-sm">✔ Lab Visit</p>}
-            </div>
-            <div className="mt-4">
-              {isInCart(test._id) ? (
-                <button onClick={() => handleRemoveFromCart(test)} className="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
-              ) : (
-                <button onClick={() => handleAddToCart(test)} className="bg-blue-600 text-white px-4 py-2 rounded">Add to cart</button>
-              )}
-            </div>
-          </div>
-        ))}
-        {filteredTests.length === 0 && <p className="text-center text-gray-600">No tests found.</p>}
+      {filteredTests.map((test) => (
+  <div key={test._id} className="bg-white shadow-md p-4 rounded-lg">
+    <h3 className="font-semibold text-lg">{test.name}</h3>
+    <div className="mb-2">
+      <span className="text-sm text-gray-500">{test.departmentName}</span>
+      <span className="text-xs text-gray-400 ml-2">#{test.testCode}</span>
+    </div>
+    <p className="text-gray-600 text-sm">{test.description}</p>
+    <p className="text-gray-600 text-sm">{test.instructions}</p>
+    
+    <div className="price-container mt-2">
+      <span className="line-through text-gray-400 mr-2">₹{test.testMrp}</span>
+      <span className="text-xl font-bold text-red-600">₹{test.testOfferRate}</span>
+    </div>
+
+    <div className="flex items-center space-x-2 mt-2">
+      {test.homeCollection && <p className="text-green-600 text-sm">✔ Home Collection</p>}
+      {test.labVisit && <p className="text-green-600 text-sm">✔ Lab Visit</p>}
+    </div>
+
+    <div className="mt-4">
+      {isInCart(test._id) ? (
+        <button onClick={() => handleRemoveFromCart(test)} className="bg-red-500 text-white px-4 py-2 rounded">
+          Remove
+        </button>
+      ) : (
+        test.available ? (
+          <button onClick={() => handleAddToCart(test)} className="bg-blue-600 text-white px-4 py-2 rounded">
+            Add to cart
+          </button>
+        ) : (
+          <button disabled className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed">
+            Out of Stock
+          </button>
+        )
+      )}
+    </div>
+  </div>
+))}
+{filteredTests.length === 0 && <p className="text-center text-gray-600">No tests found.</p>}
       </div>
       {showPopup && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">

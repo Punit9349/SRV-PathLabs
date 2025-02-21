@@ -7,17 +7,10 @@ import About from '../components/common/About';
 import TestsSection from '../components/common/TestsSection';
 import Footer from '../components/common/Footer';
 import CertificateSection from '../components/common/Certificates';
-import ExploreMore from '../components/common/ExploreMore'
-import SpecialPrograms from '../components/common/SpecialPrograms';
-import RunningLine from '../components/common/RunningLine';
 
 const Home = () => {
   return (
     <div className='flex flex-col'>
-      {/* <div className=''>
-        <RunningLine/>
-      </div> */}
-
       <div className=''>
         <Banner/>
       </div> 

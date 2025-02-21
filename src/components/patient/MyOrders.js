@@ -85,7 +85,7 @@ const MyOrders = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         {order.paymentImage ? (
                           <a
-                            href={`/uploads/orders/${order.paymentImage}`}
+                            href={`${host}/uploads/orders/${order.paymentImage}`}
                             download
                             className="text-indigo-600 hover:text-indigo-900 font-medium hover:underline flex items-center"
                           >
@@ -160,7 +160,7 @@ const MyOrders = () => {
                       <span className="text-sm font-medium text-gray-500">Payment Proof</span>
                       {order.paymentImage ? (
                         <a
-                          href={`/uploads/orders/${order.paymentImage}`}
+                          href={`${host}/uploads/orders/${order.paymentImage}`}
                           download
                           className="text-indigo-600 hover:text-indigo-900 font-medium hover:underline flex items-center"
                         >

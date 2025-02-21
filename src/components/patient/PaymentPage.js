@@ -193,7 +193,7 @@ const PaymentPage = () => {
       }); 
       
       alert("Order submitted successfully!");
-      navigate("/order-success");
+      navigate("/my-orders");
     } catch (error) {
       console.error("Error submitting order:", error);
       alert("Failed to submit order");
@@ -218,7 +218,7 @@ const PaymentPage = () => {
               cart.items.map((item, index) => (
                 <div key={index} className="border-b py-2">
                   {item.test ? (
-                    <p>{item.test.name} (₹ {item.test.price}) x {item.quantity}</p>
+                    <p>{item.test.name} (₹ {item.test.testOfferRate}) x {item.quantity}</p>
                   ) : item.program ? (
                     <p>{item.program.name} (₹ {item.program.price})</p>
                   ) : null}
