@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import API_BASE_URL from "../../config";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const patientId = localStorage.getItem("patientId");
-  const host = "http://localhost:5000";
+  const host = API_BASE_URL;
 
   useEffect(() => {
     fetch(`${host}/api/orders/patient/${patientId}`)

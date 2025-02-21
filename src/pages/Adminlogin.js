@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
+import API_BASE_URL from "../config";
 
 const AdminAuth = () => {
   let navigate=useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const host=API_BASE_URL;
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -25,7 +27,7 @@ const AdminAuth = () => {
     try {
       if (isLogin) {
         // Login API call
-        const response = await axios.post(`http://localhost:5000/api/admin/login`, {
+        const response = await axios.post(`${host}/api/admin/login`, {
           phone: formData.phone,
           password: formData.password,
         });
@@ -38,7 +40,7 @@ const AdminAuth = () => {
         navigate("/admin-dashboard");
       } else {
         // Signup API call
-        const response = await axios.post(`http://localhost:5000/api/admin/register`, formData);
+        const response = await axios.post(`${host}/api/admin/register`, formData);
         if(response.data.success){
           localStorage.setItem('token_admin', response.data.authToken);
           localStorage.setItem('adminId', response.data.id);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminAuth from "../components/patient/Login";
+import API_BASE_URL from "../config";
 import { useNavigate } from "react-router-dom";
 
 const TestMenu = () => {
@@ -10,7 +11,7 @@ const TestMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-  const host = "http://localhost:5000"; // Update if needed
+  const host = API_BASE_URL; // Update if needed
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ const TestMenu = () => {
     const fetchTests = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/tests/getAllTests");
+        const response = await axios.get(`${host}/api/tests/getAllTests`);
         setTests(response.data);
       } catch (err) {
         setError("Failed to fetch tests. Please try again later.");
@@ -56,7 +57,7 @@ const TestMenu = () => {
       const token = localStorage.getItem("token");
       const patientId = localStorage.getItem("patientId");
 
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
+      const response = await axios.post(`${host}/api/cart/add`, {
         patientId,
         testId:test._id,
         price:test.testOfferRate,
@@ -75,7 +76,7 @@ const TestMenu = () => {
       const token = localStorage.getItem("token");
       const patientId = localStorage.getItem("patientId");
 
-      const response = await axios.put("http://localhost:5000/api/cart/remove", {
+      const response = await axios.put(`${host}/api/cart/remove`, {
         patientId: patientId,
         testId: test._id,
         price:test.price,

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const SpecialPrograms = () => {
   const [programs, setPrograms] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(null);
-  const host = "http://localhost:5000"; // Update if needed
+  const host = API_BASE_URL; // Update if needed
   const patientId = localStorage.getItem("patientId"); 
   const token=localStorage.getItem("token");
 

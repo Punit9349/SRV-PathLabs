@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../../config";
 
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const AppointmentForm = () => {
     prescription: null,
   });
 
-  const host = "http://localhost:5000";
+  const host = API_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;

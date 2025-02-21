@@ -149,8 +149,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 const Cart = () => {
+  const host=API_BASE_URL;
   const [cartItems, setCartItems] = useState([]);
   const [cartPrograms, setCartPrograms] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -170,7 +172,7 @@ const Cart = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/cart/${patientId}`);
+        const response = await axios.get(`${host}/api/cart/${patientId}`);
         const cart = response.data;
         const items = cart.items || [];
         
@@ -191,7 +193,7 @@ const Cart = () => {
     if (!patientId) return;
 
     try {
-      await axios.put("http://localhost:5000/api/cart/remove", { patientId, testId, price }, {
+      await axios.put(`${host}/api/cart/remove`, { patientId, testId, price }, {
         headers: { "auth-token": token },
       });
       const updatedCart = cartItems.filter((item) => item.test._id !== testId);
@@ -208,7 +210,7 @@ const Cart = () => {
     if (!patientId) return;
 
     try {
-      await axios.put("http://localhost:5000/api/cart/remove", { patientId, programId, price }, {
+      await axios.put(`${host}/api/cart/remove`, { patientId, programId, price }, {
         headers: { "auth-token": token },
       });
       const updatedPrograms = cartPrograms.filter((item) => item.program._id !== programId);

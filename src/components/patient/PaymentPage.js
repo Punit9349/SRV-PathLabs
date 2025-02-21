@@ -144,6 +144,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../../config";
 
 const PaymentPage = () => {
   const [patient, setPatient] = useState({});
@@ -151,16 +152,17 @@ const PaymentPage = () => {
   const [transactionId, setTransactionId] = useState("");
   const [paymentImage, setPaymentImage] = useState(null);
   const navigate = useNavigate();
+  const host=API_BASE_URL;
 
   useEffect(() => {
     const patientId = localStorage.getItem("patientId");
     if (!patientId) return;
 
-    axios.get(`http://localhost:5000/api/patients/getPatientById/${patientId}`)
+    axios.get(`${host}/api/patients/getPatientById/${patientId}`)
       .then((res) => setPatient(res.data))
       .catch((err) => console.error("Error fetching patient details:", err));
 
-    axios.get(`http://localhost:5000/api/cart/${patientId}`, {
+    axios.get(`${host}/api/cart/${patientId}`, {
       headers: { "auth-token": localStorage.getItem("token") },
     })
       .then((res) => setCart(res.data))
@@ -185,10 +187,10 @@ const PaymentPage = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/orders/submit", orderData);
+      await axios.post(`${host}/api/orders/submit`, orderData);
       
       // Clear cart after successful order submission
-      await axios.delete(`http://localhost:5000/api/cart/clear/${patientId}`, {
+      await axios.delete(`${host}/api/cart/clear/${patientId}`, {
         headers: { "auth-token": localStorage.getItem("token") },
       }); 
       

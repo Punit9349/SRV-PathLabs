@@ -50,18 +50,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { DownloadIcon, Loader2 } from 'lucide-react';
+import API_BASE_URL from '../../config';
 
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const patientId = localStorage.getItem('patientId');
+  const host=API_BASE_URL;
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/patients/reports/${patientId}`
+          `${host}/api/patients/reports/${patientId}`
         );
         setReports(response.data);
       } catch (error) {
