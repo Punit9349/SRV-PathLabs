@@ -5,9 +5,12 @@ import AppointmentManagement from './AppointmentsManagement';
 import OrdersManagement from './OrdersManagement';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+import API_BASE_URL from './../../config';
 
 const AdminDashboard = () => {
   let navigate=useNavigate();
+  // const host = "http://82.29.160.72:5000";
+  const host=API_BASE_URL;
   const [activeTab, setActiveTab] = useState('patients'); // Default tab
   const [patients, setPatients] = useState([]);
   const [tests, setTests] = useState([]);
@@ -53,7 +56,7 @@ const AdminDashboard = () => {
   // Fetch Patients
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/patients/getAllPatients',{
+      const response = await axios.get(`${host}/api/patients/getAllPatients`,{
         headers: {
           "auth-token": token,
         }, 
@@ -67,7 +70,7 @@ const AdminDashboard = () => {
   // Fetch Tests
   const fetchTests = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/tests/getAllTests');
+      const response = await axios.get(`${host}/api/tests/getAllTests`);
       setTests(response.data);
     } catch (error) {
       console.error('Error fetching tests:', error);
@@ -87,13 +90,13 @@ const AdminDashboard = () => {
   const handleSaveTest = async () => {
     try {
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/tests/editTest/${editTestId}`, newTest, {
+        await axios.put(`${host}/api/tests/editTest/${editTestId}`, newTest, {
           headers: {
             "auth-token": token,
           }, 
         });
       } else {
-        await axios.post('http://localhost:5000/api/tests/addTest', newTest, {
+        await axios.post(`${host}/api/tests/addTest`, newTest, {
           headers: {
             "auth-token": token,
           }, 
@@ -157,15 +160,15 @@ const AdminDashboard = () => {
 
   const handleDeleteTest = async (testId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tests/deleteTest/${testId}`, {
+      await axios.delete(`${host}/api/tests/deleteTest/${testId}`, {
         headers: {
           "auth-token": token,
         }, 
       });
-      // setMessage("Test deleted successfully!");
+      setMessage("Test deleted successfully!");
       setTests(tests.filter((test) => test._id !== testId));
     } catch (error) {
-      // setMessage("Error deleting test.");
+      setMessage("Error deleting test.");
     }
   };
 

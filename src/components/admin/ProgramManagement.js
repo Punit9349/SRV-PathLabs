@@ -243,6 +243,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_BASE_URL from './../../config';
 
 const AdminSpecialPrograms = () => {
   const [programs, setPrograms] = useState([]);
@@ -261,7 +262,7 @@ const AdminSpecialPrograms = () => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
-  const host = "http://localhost:5000";
+  const host = API_BASE_URL;
 
   // Fetch programs
   const fetchPrograms = async () => {

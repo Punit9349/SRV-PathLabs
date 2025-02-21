@@ -114,9 +114,11 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_BASE_URL from './../../config';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
+  const host=API_BASE_URL;
 
   useEffect(() => {
     fetchOrders();
@@ -124,7 +126,7 @@ const AdminOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/orders");
+      const { data } = await axios.get(`${host}/api/orders`);
       setOrders(data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -134,7 +136,7 @@ const AdminOrders = () => {
   const handleDelete = async (orderId) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/orders/${orderId}`);
+      await axios.delete(`${host}/api/orders/${orderId}`);
       setOrders(orders.filter((order) => order._id !== orderId));
     } catch (error) {
       console.error("Error deleting order:", error);
@@ -144,7 +146,7 @@ const AdminOrders = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status: newStatus });
+      await axios.put(`${host}/api/orders/${orderId}/status`, { status: newStatus });
       setOrders(orders.map(order => order._id === orderId ? { ...order, status: newStatus } : order));
     } catch (error) {
       console.error("Error updating order status:", error);

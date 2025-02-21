@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import API_BASE_URL from './../../config';
 import axios from "axios";
 
 const AppointmentManagement = () => {
   const [appointments, setAppointments] = useState([]);
-  const host = "http://localhost:5000";
+  const host = API_BASE_URL;
 
   useEffect(() => {
     fetchAppointments();

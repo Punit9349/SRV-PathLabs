@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API_BASE_URL from './../../config';
 
 const ReportManagement = () => {
   const [patientId, setPatientId] = useState('');
@@ -8,6 +9,7 @@ const ReportManagement = () => {
   const [remark, setRemark] = useState('');
   const [success, setSuccess] = useState('');
   const token=localStorage.getItem('token_admin');
+  const host=API_BASE_URL;
   const handleUpload = async (e) => {
     e.preventDefault();
 
@@ -23,7 +25,7 @@ const ReportManagement = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/reports/upload-report/${patientId}`,
+        `${host}/api/reports/upload-report/${patientId}`,
         formData,{
           headers: {
             "auth-token": token,
