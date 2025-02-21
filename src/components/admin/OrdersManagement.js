@@ -206,7 +206,7 @@ const AdminOrders = () => {
                 <td className="p-2">
                   {order.paymentImage && (
                     <a
-                      href={`http://localhost:5000/uploads/orders/${order.paymentImage}`}
+                      href={`${host}/uploads/orders/${order.paymentImage}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500 underline mr-2"
@@ -275,7 +275,7 @@ const AdminOrders = () => {
                   <div className="border-t pt-2 space-y-2">
                     {order.paymentImage && (
                       <a
-                        href={`http://localhost:5000/uploads/orders/${order.paymentImage}`}
+                        href={`${host}/uploads/orders/${order.paymentImage}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block text-blue-600 text-sm underline truncate"
