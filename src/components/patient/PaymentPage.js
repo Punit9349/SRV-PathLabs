@@ -238,6 +238,7 @@ const PaymentPage = () => {
           <h2 className="text-2xl font-semibold mb-4">Payment Information</h2>
           <div className="mb-6 text-center">
             <img src="/qr-code.jpeg" alt="QR Code" className="w-48 h-72 mx-auto" />
+            <img src="/qr2.png" alt="QR Code" className="w-48 h-72 mx-auto mt-7" />
             <div className="mt-4">
               <p className="font-bold">Bank Details:</p>
               <p>Account Name: SRV PathLabs Pvt Ltd</p>

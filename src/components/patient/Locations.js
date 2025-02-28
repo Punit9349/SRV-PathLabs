@@ -7,10 +7,10 @@ const Locations = () => {
       city: "Delhi",
       address: "B-2/28A, Yamuna Vihar",
       nearby: "Near Bhajanpura Petrol Pump",
-      googleMapsLink: "https://goo.gl/maps/example1",
+      googleMapsLink: "https://www.google.com/maps/place//@28.7026843,77.2506015,15z/data=!4m6!1m5!3m4!2zMjjCsDQyJzA5LjYiTiA3N8KwMTYnMDguNiJF!8m2!3d28.7026667!4d77.2690556?hl=en&entry=ttu&g_ep=EgoyMDI1MDIyNS4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D",
       timings: "08:00 AM - 08:00 PM",
       weekdays: "Monday - Sunday",
-      phone: "+91-1234567890",
+      phone: "+91 9310740740",
       services: "Pathology, Laboratory"
     },
     {
