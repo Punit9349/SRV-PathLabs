@@ -2,21 +2,7 @@ import React from "react";
 
 const TestsSection = () => {
   const labTests = [
-    "Agartala", "Agra", "Ahmedabad", "Aligarh", "Allahabad", "Alwar", "Ambala", "Amravati", 
-    "Amritsar", "Aurangabad", "Azamgarh", "Bahadurgarh", "Bareilly", "Begusarai", 
-    "Bengaluru", "Bhatinda", "Bhilai", "Bhopal", "Bhubaneshwar", "Bijnor", "Bilaspur", 
-    "Chandigarh", "Chennai", "Coimbatore", "Daltonganj", "Darbhanga", "Dehradun", 
-    "Delhi", "Deoria", "Dhanbad", "Durgapur", "Faridabad", "Faizabad", "Gaya", 
-    "Ghaziabad", "Goa Velha", "Gorakhpur", "Greater Noida", "Gurgaon", "Guwahati", 
-    "Gwalior", "Haldwani", "Haridwar", "Hisar", "Hoshipur", "Howrah", "Hyderabad", 
-    "Indore", "Jabalpur", "Jaipur", "Jalandhar", "Jammu", "Jamshedpur", "Jodhpur", 
-    "Kangra", "Kanpur", "Karnal", "Khanna", "Kochi", "Kolkata", "Kota", "Kurukshetra", 
-    "Lucknow", "Ludhiana", "Mangalore", "Mathura", "Meerut", "Modinagar", "Moga", 
-    "Mohali", "Moradabad", "Mumbai", "Muzaffarpur", "Mysore", "Nagpur", "Nashik", 
-    "Noida", "Panchkula", "Panipat", "Pathankot", "Patiala", "Patna", "Pune", "Purnia", 
-    "Raipur", "Ranchi", "Rewari", "Rohtak", "Sagar", "Saharanpur", "Shillong", "Shimla", 
-    "Silchar", "Siliguri", "Sirsa", "Sonipat", "Srinagar", "Udaipur", "Vadodara", 
-    "Varanasi", "Yamuna Nagar",
+    "Delhi","Uttar Pradesh","Bihar"
   ];
 
   const popularTests = [

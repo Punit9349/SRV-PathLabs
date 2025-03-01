@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Whyus = () => {
   const stats = [
-    { value: '50mn', label: 'Samples Collected', icon: '🌍' },
-    { value: '27mn', label: 'Total No. of Customers', icon: '👥' },
-    { value: '280+', label: 'Labs', icon: '🧪' },
-    { value: '5,500+', label: 'Patient Service Centres', icon: '👤' },
-    { value: '5,000+', label: 'Total No. of Tests and Panels', icon: '🧫' },
-    { value: '11000+', label: 'Pick-up Points', icon: '📍' },
+    { value: '1000+', label: 'Samples Collected', icon: '🌍' },
+    { value: '700+', label: 'Total No. of Customers', icon: '👥' },
+    { value: '8', label: 'Labs', icon: '🧪' },
+    { value: '150+', label: 'Patient Service Centres', icon: '👤' },
+    { value: '1,500+', label: 'Total No. of Tests and Panels', icon: '🧫' },
+    { value: '150+', label: 'Pick-up Points', icon: '📍' },
   ];
 
   return (

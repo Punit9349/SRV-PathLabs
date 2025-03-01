@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="bg-yellow-400 py-16 px-28 mt-12">
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Patients Section */}
         <div>
           <h3 className="font-bold text-lg mb-4">PATIENTS</h3>
@@ -37,7 +37,7 @@ const Footer = () => {
             <li>Partner With Us</li>
             <li>Become a Vendor</li>
             <li>Corporate Tie-up</li>
-            <li>International Partnership</li>
+            {/* <li>International Partnership</li> */}
             <li>Corporate Covid Testing</li>
           </ul>
         </div>
@@ -51,13 +51,13 @@ const Footer = () => {
             <li>Our Team</li>
             <li>Our Network</li>
             <li>Logistics Strength</li>
-            <li>CSR</li>
-            <li>Career</li>
+            {/* <li>CSR</li>
+            <li>Career</li> */}
           </ul>
         </div>
 
         {/* Investors Section */}
-        <div>
+        {/* <div>
           <h3 className="font-bold text-lg mb-4">INVESTORS</h3>
           <ul className="space-y-2">
             <li>Financials</li>
@@ -66,7 +66,7 @@ const Footer = () => {
             <li>Smart ODR</li>
             <li>SEBI Scores</li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

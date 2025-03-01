@@ -4,7 +4,7 @@ const QualitySection = () => {
   const qualityData = [
     {
       icon: "📋", // Replace with the actual icon/image source
-      count: "600+",
+      count: "50+",
       description: "Instruments used for real-time QC monitoring",
     },
     {
