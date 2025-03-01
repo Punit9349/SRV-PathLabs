@@ -173,7 +173,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-6 w-full overflow-x-hidden " style={{ backgroundImage: "url('/back1.jpg')" }}>
+    <div className="min-h-screen bg-gray-100 p-4 md:p-6 w-full overflow-x-hidden ">
       {/* Header */}
       <div className="bg-blue-600 text-white p-4 rounded-lg shadow-md">
         <h1 className="text-xl font-bold">Admin Dashboard</h1>
