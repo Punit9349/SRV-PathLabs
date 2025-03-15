@@ -61,6 +61,7 @@ import Banner from '../components/common/Banner';
 import ServicesBar from '../components/common/ServiceBar';
 import Whyus from '../components/common/Whyus';
 import QualitySection from '../components/common/QualitySection';
+import SpecialPrograms from '../components/common/SpecialPrograms';
 import About from '../components/common/About';
 import TestsSection from '../components/common/TestsSection';
 import Footer from '../components/common/Footer';
@@ -112,7 +113,7 @@ const Home = () => {
 
       {/* <div className='px-7 py-1'>
       <SpecialPrograms/>
-      </div>  */}
+      </div>   */}
 
      
 

@@ -245,11 +245,12 @@ const AdminAuth = () => {
       } else {
         // Signup API call
         const response = await axios.post(`${host}/api/patients/register`, formData);
-        setMessage(response.data.message || "Signup successful!");
+        // setMessage(response.data.message || "Signup successful!");
         if(response.data.success){
           localStorage.setItem('token', response.data.authToken);
           localStorage.setItem('patientId', response.data.id);
         }
+        setMessage(response.data.message || "Signup successful!");
         navigate("/test-menu");
       }
     } catch (error) {

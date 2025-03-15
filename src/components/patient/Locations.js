@@ -29,7 +29,7 @@ const Locations = () => {
       city: "Sitamarhi(Bihar)",
       address: "Hospital Road, Madhesra Niwas",
       nearby: "",
-      googleMapsLink: "https://goo.gl/maps/example3",
+      googleMapsLink: "https://maps.app.goo.gl/CnqrnGd46VSqa9Zg8",
       timings: "10:00 AM - 06:00 PM",
       weekdays: "Monday - Friday",
       phone: "+91-1122334455",
@@ -67,7 +67,7 @@ const Locations = () => {
               {/* Top Section */}
               <div>
                 <h2 className="text-lg font-semibold text-blue-800 flex items-center">
-                  <span className="mr-2">🔬</span> {location.name}
+                  <span className="mr-2">🔬</span> {location.name} - {location.city}
                 </h2>
                 <p className="text-gray-600">
                   {location.timings} | {location.weekdays}

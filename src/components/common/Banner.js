@@ -28,7 +28,7 @@ const BannerCarousel = ({ images }) => {
   }, [images]);
 
   return (
-    <div className="relative w-full overflow-hidden h-28 sm:h-40 md:h-56 lg:h-80">
+    <div className="relative w-full overflow-hidden h-28 sm:h-40 md:h-56 lg:h-96">
       {/* Wrapper for sliding animation */}
       <div
         className="absolute inset-0 flex transition-transform duration-1000"
@@ -41,7 +41,7 @@ const BannerCarousel = ({ images }) => {
             key={index}
             src={image}
             alt={`Banner ${index + 1}`}
-            className="w-full object-cover flex-shrink-0 h-28 sm:h-40 md:h-56 lg:h-80"
+            className="w-full object-cover flex-shrink-0 h-28 sm:h-40 md:h-56 lg:h-96"
           />
         ))}
       </div>
