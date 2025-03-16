@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminAuth from "../components/patient/Login";
 import API_BASE_URL from "../config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const TestMenu = () => {
   const [tests, setTests] = useState([]);
@@ -11,9 +11,24 @@ const TestMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-  const host = API_BASE_URL; // Update if needed
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const host = API_BASE_URL;
+
+  // Function to check login status
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const searchValue = queryParams.get("search");
+    if (searchValue) {
+      setSearchTerm(searchValue);
+    }
+  }, [location.search]);
+
+  const checkLoginStatus = () => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  };
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -45,6 +60,22 @@ const TestMenu = () => {
     fetchCart();
   }, []);
 
+  // Recheck login status whenever localStorage changes
+  useEffect(() => {
+    const interval = setInterval(checkLoginStatus, 1000); // Check every second
+
+    // Cleanup on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  // Listen for changes in localStorage (e.g., logout from another tab)
+  useEffect(() => {
+    const handleStorageChange = () => checkLoginStatus();
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const isInCart = (testId) => cart.some((item) => item.test?._id === testId);
 
   const handleAddToCart = async (test) => {
@@ -57,13 +88,11 @@ const TestMenu = () => {
       const token = localStorage.getItem("token");
       const patientId = localStorage.getItem("patientId");
 
-      const response = await axios.post(`${host}/api/cart/add`, {
-        patientId,
-        testId:test._id,
-        price:test.testOfferRate,
-      }, {
-        headers: { "auth-token": token },
-      });
+      await axios.post(
+        `${host}/api/cart/add`,
+        { patientId, testId: test._id, price: test.testOfferRate },
+        { headers: { "auth-token": token } }
+      );
 
       setCart([...cart, { test }]); // Update UI instantly
     } catch (err) {
@@ -76,15 +105,12 @@ const TestMenu = () => {
       const token = localStorage.getItem("token");
       const patientId = localStorage.getItem("patientId");
 
-      const response = await axios.put(`${host}/api/cart/remove`, {
-        patientId: patientId,
-        testId: test._id,
-        price:test.price,
-      }, {
-        headers: { "auth-token": token },
-      });
+      await axios.put(
+        `${host}/api/cart/remove`,
+        { patientId, testId: test._id, price: test.testOfferRate },
+        { headers: { "auth-token": token } }
+      );
 
-      // setCart(response.data.items);
       setCart(cart.filter((item) => item.test?._id !== test._id));
     } catch (err) {
       console.error("Error removing from cart:", err.response?.data || err.message);
@@ -97,7 +123,7 @@ const TestMenu = () => {
     navigate("/register");
   };
 
-  const filteredTests = tests.filter(test =>
+  const filteredTests = tests.filter((test) =>
     test.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -115,51 +141,60 @@ const TestMenu = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-      {filteredTests.map((test) => (
-  <div key={test._id} className="bg-white shadow-md p-4 rounded-lg">
-    <h3 className="font-semibold text-lg">{test.name}</h3>
-    <div className="mb-2">
-      <span className="text-sm text-gray-500">{test.departmentName}</span>
-      <span className="text-xs text-gray-400 ml-2">#{test.testCode}</span>
-    </div>
-    <p className="text-gray-600 text-sm">{test.description}</p>
-    <p className="text-gray-600 text-sm">{test.instructions}</p>
-    
-    <div className="price-container mt-2">
-      <span className="line-through text-gray-400 mr-2">₹{test.testMrp}</span>
-      <span className="text-xl font-bold text-red-600">₹{test.testOfferRate}</span>
-    </div>
+        {filteredTests.map((test) => (
+          <div key={test._id} className="bg-white shadow-md p-4 rounded-lg">
+            <h3 className="font-semibold text-lg">{test.name}</h3>
+            <div className="mb-2">
+              <span className="text-sm text-gray-500">{test.departmentName}</span>
+              <span className="text-xs text-gray-400 ml-2">#{test.testCode}</span>
+            </div>
+            <p className="text-gray-600 text-sm">{test.description}</p>
+            <p className="text-gray-600 text-sm">{test.instructions}</p>
 
-    <div className="flex items-center space-x-2 mt-2">
-      {test.homeCollection && <p className="text-green-600 text-sm">✔ Home Collection</p>}
-      {test.labVisit && <p className="text-green-600 text-sm">✔ Lab Visit</p>}
-    </div>
+            <div className="price-container mt-2">
+              <span className="line-through text-gray-400 mr-2">₹{test.testMrp}</span>
+              <span className="text-xl font-bold text-red-600">₹{test.testOfferRate}</span>
+            </div>
 
-    <div className="mt-4">
-      {isInCart(test._id) ? (
-        <button onClick={() => handleRemoveFromCart(test)} className="bg-red-500 text-white px-4 py-2 rounded">
-          Remove
-        </button>
-      ) : (
-        test.available ? (
-          <button onClick={() => handleAddToCart(test)} className="bg-blue-600 text-white px-4 py-2 rounded">
-            Add to cart
-          </button>
-        ) : (
-          <button disabled className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed">
-            Out of Stock
-          </button>
-        )
-      )}
-    </div>
-  </div>
-))}
-{filteredTests.length === 0 && <p className="text-center text-gray-600">No tests found.</p>}
+            <div className="flex items-center space-x-2 mt-2">
+              {test.homeCollection && <p className="text-green-600 text-sm">✔ Home Collection</p>}
+              {test.labVisit && <p className="text-green-600 text-sm">✔ Lab Visit</p>}
+            </div>
+
+            <div className="mt-4">
+              {isInCart(test._id) ? (
+                <button
+                  onClick={() => handleRemoveFromCart(test)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Remove
+                </button>
+              ) : test.available ? (
+                <button
+                  onClick={() => handleAddToCart(test)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded"
+                >
+                  Add to cart
+                </button>
+              ) : (
+                <button disabled className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed">
+                  Out of Stock
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+        {filteredTests.length === 0 && <p className="text-center text-gray-600">No tests found.</p>}
       </div>
       {showPopup && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg w-80 relative">
-            <button className="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800" onClick={() => setShowPopup(false)}>&times;</button>
+            <button
+              className="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800"
+              onClick={() => setShowPopup(false)}
+            >
+              &times;
+            </button>
             <div className="p-1">
               <AdminAuth onAuthSuccess={handleAuthSuccess} />
             </div>
@@ -171,6 +206,181 @@ const TestMenu = () => {
 };
 
 export default TestMenu;
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import AdminAuth from "../components/patient/Login";
+// import API_BASE_URL from "../config";
+// import { useNavigate } from "react-router-dom";
+
+// const TestMenu = () => {
+//   const [tests, setTests] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [showPopup, setShowPopup] = useState(false);
+//   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+//   const host = API_BASE_URL; // Update if needed
+//   const [cart, setCart] = useState([]);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const fetchTests = async () => {
+//       try {
+//         setLoading(true);
+//         const response = await axios.get(`${host}/api/tests/getAllTests`);
+//         setTests(response.data);
+//       } catch (err) {
+//         setError("Failed to fetch tests. Please try again later.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     const fetchCart = async () => {
+//       try {
+//         const token = localStorage.getItem("token");
+//         const patientId = localStorage.getItem("patientId");
+//         if (!token || !patientId) return;
+
+//         const { data } = await axios.get(`${host}/api/cart/${patientId}`);
+//         setCart(data?.items || []);
+//       } catch (err) {
+//         console.error("Error fetching cart items:", err);
+//       }
+//     };
+
+//     fetchTests();
+//     fetchCart();
+//   }, []);
+
+//   const isInCart = (testId) => cart.some((item) => item.test?._id === testId);
+
+//   const handleAddToCart = async (test) => {
+//     if (!isLoggedIn) {
+//       setShowPopup(true);
+//       return;
+//     }
+
+//     try {
+//       const token = localStorage.getItem("token");
+//       const patientId = localStorage.getItem("patientId");
+
+//       const response = await axios.post(`${host}/api/cart/add`, {
+//         patientId,
+//         testId:test._id,
+//         price:test.testOfferRate,
+//       }, {
+//         headers: { "auth-token": token },
+//       });
+
+//       setCart([...cart, { test }]); // Update UI instantly
+//     } catch (err) {
+//       console.error("Error adding to cart:", err.response?.data || err.message);
+//     }
+//   };
+
+//   const handleRemoveFromCart = async (test) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       const patientId = localStorage.getItem("patientId");
+
+//       const response = await axios.put(`${host}/api/cart/remove`, {
+//         patientId: patientId,
+//         testId: test._id,
+//         price:test.price,
+//       }, {
+//         headers: { "auth-token": token },
+//       });
+
+//       // setCart(response.data.items);
+//       setCart(cart.filter((item) => item.test?._id !== test._id));
+//     } catch (err) {
+//       console.error("Error removing from cart:", err.response?.data || err.message);
+//     }
+//   };
+
+//   const handleAuthSuccess = () => {
+//     setIsLoggedIn(true);
+//     setShowPopup(false);
+//     navigate("/register");
+//   };
+
+//   const filteredTests = tests.filter(test =>
+//     test.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   if (loading) return <div className="text-center text-lg">Loading...</div>;
+//   if (error) return <div className="text-center text-red-500">{error}</div>;
+
+//   return (
+//     <div className="bg-gray-100 p-5">
+//       <h1 className="text-2xl font-semibold mb-5">Available Tests</h1>
+//       <input
+//         type="text"
+//         placeholder="Search by test name"
+//         className="w-full p-3 border border-gray-300 rounded-lg"
+//         value={searchTerm}
+//         onChange={(e) => setSearchTerm(e.target.value)}
+//       />
+//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+//       {filteredTests.map((test) => (
+//   <div key={test._id} className="bg-white shadow-md p-4 rounded-lg">
+//     <h3 className="font-semibold text-lg">{test.name}</h3>
+//     <div className="mb-2">
+//       <span className="text-sm text-gray-500">{test.departmentName}</span>
+//       <span className="text-xs text-gray-400 ml-2">#{test.testCode}</span>
+//     </div>
+//     <p className="text-gray-600 text-sm">{test.description}</p>
+//     <p className="text-gray-600 text-sm">{test.instructions}</p>
+    
+//     <div className="price-container mt-2">
+//       <span className="line-through text-gray-400 mr-2">₹{test.testMrp}</span>
+//       <span className="text-xl font-bold text-red-600">₹{test.testOfferRate}</span>
+//     </div>
+
+//     <div className="flex items-center space-x-2 mt-2">
+//       {test.homeCollection && <p className="text-green-600 text-sm">✔ Home Collection</p>}
+//       {test.labVisit && <p className="text-green-600 text-sm">✔ Lab Visit</p>}
+//     </div>
+
+//     <div className="mt-4">
+//       {isInCart(test._id) ? (
+//         <button onClick={() => handleRemoveFromCart(test)} className="bg-red-500 text-white px-4 py-2 rounded">
+//           Remove
+//         </button>
+//       ) : (
+//         test.available ? (
+//           <button onClick={() => handleAddToCart(test)} className="bg-blue-600 text-white px-4 py-2 rounded">
+//             Add to cart
+//           </button>
+//         ) : (
+//           <button disabled className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed">
+//             Out of Stock
+//           </button>
+//         )
+//       )}
+//     </div>
+//   </div>
+// ))}
+// {filteredTests.length === 0 && <p className="text-center text-gray-600">No tests found.</p>}
+//       </div>
+//       {showPopup && (
+//         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+//           <div className="bg-white rounded-lg shadow-lg w-80 relative">
+//             <button className="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800" onClick={() => setShowPopup(false)}>&times;</button>
+//             <div className="p-1">
+//               <AdminAuth onAuthSuccess={handleAuthSuccess} />
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default TestMenu;
 
 
 // import React, { useState, useEffect } from "react";
