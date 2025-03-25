@@ -2,8 +2,8 @@ import React from "react";
 
 const ContactUs = () => {
   const contactInfo = [
-    { type: "Phone", details: ["+91 93107 40740 (Mobile)", "+91 11 3501 2529 (Main)", "+91 11 3501 2502 (Home)", "+91 11 3501 2501 (Work Fax)", "+91 11 3501 2530 (Home Fax)", "+91 11 4552 1751 (Work)"] },
-    { type: "Email", details: ["srvpathlabspvtltd9@gmail.com"] },
+    { type: "Phone", details: ["+91 93107 40740 (Mobile)", "+91 93137 47464", "+91 84597 47454" ,"+91 11 3501 2529 (Main)", "+91 11 3501 2502 (Home)", "+91 11 3501 2501 (Work Fax)", "+91 11 3501 2530 (Home Fax)", "+91 11 4552 1751 (Work)"] },
+    { type: "Email", details: ["srvpathlab1984@gmail.com"] },
     { type: "Address", details: ["B-2/28A, Yamuna Vihar, Near Bhajanpura Petrol Pump, Delhi, India"] },
   ];
 
