@@ -176,7 +176,7 @@ const Header = () => {
               >
                 Logout
               </button>
-              <a href="http://154.61.173.119:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200s">
+              <a href="http://176.46.153.90:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200s">
                   LIS Login
               </a>
               </>
@@ -188,7 +188,7 @@ const Header = () => {
               >
                 Login
               </a>
-              <a href="http://154.61.173.119:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
+              <a href="http://176.46.153.90:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
               LIS Login
           </a>
           </>
