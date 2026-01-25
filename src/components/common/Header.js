@@ -23,7 +23,7 @@ const Header = () => {
           {/* Logo */}
           <a href="/" className="flex-shrink-0">
             <img
-              src="logo.png"
+              src="logo1.png"
               alt="SRV PathLabs Logo"
               className="h-9 sm:h-9 md:h-10 lg:h-12 transition-all duration-200 hover:opacity-80"
             />
@@ -81,7 +81,7 @@ const Header = () => {
               >
                 Logout
               </button>
-              <a href="http://176.46.153.90:8090/pages/login.aspx" className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
+              <a href="http://srvpathlabs.in/pages/Login.aspx" className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
                  LIS Login
               </a>
               </>
@@ -89,11 +89,11 @@ const Header = () => {
               <>
               <a
                 href="/register"
-                className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
+                className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-green-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
               >
-                Login
+                Patient Login
               </a>
-              <a href="http://176.46.153.90:8090/pages/login.aspx" className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
+              <a href="http://srvpathlabs.in/pages/Login.aspx" className="px-1.5 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
                   LIS Login
               </a>
               </>
@@ -176,7 +176,7 @@ const Header = () => {
               >
                 Logout
               </button>
-              <a href="http://176.46.153.90:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200s">
+              <a href="http://srvpathlabs.in/pages/Login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200s">
                   LIS Login
               </a>
               </>
@@ -184,11 +184,11 @@ const Header = () => {
               <>
               <a
                 href="/register"
-                className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
+                className="block w-full px-3 py-2.5 mx-1 mt-4 bg-green-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
               >
-                Login
+                Patient Login
               </a>
-              <a href="http://176.46.153.90:8090/pages/login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
+              <a href="http://srvpathlabs.in/pages/Login.aspx" className="block w-full px-3 py-2.5 mx-1 mt-4 bg-blue-600 text-white text-center text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200">
               LIS Login
           </a>
           </>
@@ -292,7 +292,7 @@ export default Header;
 //                 onMouseLeave={() => setIsHovered(false)}
 //               >
 //                 <button className="px-3 py-2 lg:px-4 lg:py-2.5 bg-blue-600 text-white text-sm lg:text-base font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center gap-1">
-//                   Patient Login
+//                   Patient Patient Login
 //                   <svg
 //                     className="w-4 h-4 transition-transform duration-200"
 //                     fill="none"
@@ -315,13 +315,13 @@ export default Header;
 //                       href="/register"
 //                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 //                     >
-//                       Patient Login
+//                       Patient Patient Login
 //                     </a>
 //                     <a
-//                       href="http://154.61.173.119:8090/pages/login.aspx"
+//                       href="http://154.61.173.119:8090/pages/Patient Login.aspx"
 //                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 //                     >
-//                       LIS Login
+//                       LIS Patient Login
 //                     </a>
 //                   </div>
 //                 </div>
@@ -402,10 +402,10 @@ export default Header;
 //                 Logout
 //               </button>
 //               <a
-//                   href="http://154.61.173.119:8090/pages/login.aspx"
+//                   href="http://154.61.173.119:8090/pages/Patient Login.aspx"
 //                   className="block px-3 py-2.5 text-white bg-gray-600 hover:bg-gray-700 rounded-md transition-colors"
 //                 >
-//                   LIS Login
+//                   LIS Patient Login
 //                 </a>
 //               </>
               
@@ -415,13 +415,13 @@ export default Header;
 //                   href="/register"
 //                   className="block px-3 py-2.5 text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
 //                 >
-//                   Patient Login
+//                   Patient Patient Login
 //                 </a>
 //                 <a
-//                   href="http://154.61.173.119:8090/pages/login.aspx"
+//                   href="http://154.61.173.119:8090/pages/Patient Login.aspx"
 //                   className="block px-3 py-2.5 text-white bg-gray-600 hover:bg-gray-700 rounded-md transition-colors"
 //                 >
-//                   LIS Login
+//                   LIS Patient Login
 //                 </a>
 //               </div>
 //             )}
